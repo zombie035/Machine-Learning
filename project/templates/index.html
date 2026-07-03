@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Loan Prediction</title>
+    <link rel="stylesheet" href="/static/style.css">
+  </head>
+  <body>
+    <div class="container">
+      <header class="hero">
+        <h1>Loan Approval Predictor</h1>
+        <p class="lead">Enter applicant details and get an instant approval prediction.</p>
+      </header>
+
+      <main class="card">
+        <form id="predict-form" class="form-grid">
+          <div class="field">
+            <label>No. of Dependents</label>
+            <input name="no_of_dependents" type="number" value="2" required placeholder="e.g. 2">
+          </div>
+
+          <div class="field">
+            <label>Self Employed</label>
+            <select name="self_employed">
+              <option value="No" selected>No</option>
+              <option value="Yes">Yes</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Income (annum)</label>
+            <input name="income_annum" type="number" value="8000000" required placeholder="e.g. 8000000">
+          </div>
+
+          <div class="field">
+            <label>Loan Amount</label>
+            <input name="loan_amount" type="number" value="25000000" required placeholder="e.g. 25000000">
+          </div>
+
+          <div class="field">
+            <label>Loan Term (years)</label>
+            <input name="loan_term" type="number" value="10" required placeholder="e.g. 10">
+          </div>
+
+          <div class="field">
+            <label>CIBIL Score</label>
+            <input name="cibil_score" type="number" value="750" required placeholder="e.g. 750">
+          </div>
+
+          <div class="field">
+            <label>Commercial Assets Value</label>
+            <input name="commercial_assets_value" type="number" value="5000000" required placeholder="e.g. 5000000">
+          </div>
+
+          <div class="field">
+            <label>Luxury Assets Value</label>
+            <input name="luxury_assets_value" type="number" value="20000000" required placeholder="e.g. 20000000">
+          </div>
+
+          <div class="field">
+            <label>Bank Asset Value</label>
+            <input name="bank_asset_value" type="number" value="7000000" required placeholder="e.g. 7000000">
+          </div>
+
+          <div class="actions" style="grid-column: 1 / -1;">
+            <button type="submit" class="btn-primary">Predict</button>
+            <button type="button" id="fill-sample" class="btn-ghost">Fill Example</button>
+          </div>
+        </form>
+
+        <div id="result" class="result">Prediction will appear here.</div>
+      </main>
+
+      <footer class="footer">Tip: Use the <strong>Fill Example</strong> button to load sample values.</footer>
+    </div>
+
+    <script src="/static/script.js"></script>
+  </body>
+</html>
