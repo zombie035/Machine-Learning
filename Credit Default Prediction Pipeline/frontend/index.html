@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CreditGuard AI — Credit Default Predictor</title>
+  <meta name="description" content="AI-powered credit card default risk assessment using machine learning. Enter customer financial data to instantly predict default probability." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ══ Header ══════════════════════════════════════════════════════════ -->
+  <header class="header">
+    <div class="logo">
+      <div class="logo-icon">💳</div>
+      <span class="logo-text">Credit<span>Guard</span> AI</span>
+    </div>
+    <div class="header-badge">
+      <div class="badge-dot"></div>
+      <span>Model Online · Logistic Regression · UCI Dataset</span>
+    </div>
+  </header>
+
+  <!-- ══ Hero ════════════════════════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero-tag">🤖 Machine Learning · Risk Analysis</div>
+    <h1>Credit Default<br /><span class="gradient-text">Risk Predictor</span></h1>
+    <p>Enter a customer's financial profile below to instantly assess their default probability using our trained AI model.</p>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-value">30,000</div>
+        <div class="stat-label">Training Samples</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">71%</div>
+        <div class="stat-label">ROC-AUC Score</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">23</div>
+        <div class="stat-label">Features</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">&lt;50ms</div>
+        <div class="stat-label">Inference Time</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ Main Form ════════════════════════════════════════════════════════ -->
+  <main class="container">
+    <form id="predict-form" novalidate>
+
+      <!-- Grid of 4 sections -->
+      <div class="form-wrapper glass-card">
+
+        <!-- ── Section 1: Personal Info ──────────────────────────────── -->
+        <div class="form-section">
+          <div class="section-header">
+            <div class="section-icon blue">👤</div>
+            <div>
+              <div class="section-title">Personal Information</div>
+              <div class="section-subtitle">Basic demographic data</div>
+            </div>
+          </div>
+          <div class="field-group" style="grid-template-columns: 1fr 1fr;">
+
+            <div class="field">
+              <label>Credit Limit (NT$)
+                <span class="tooltip-wrap">
+                  <span class="tooltip-icon">?</span>
+                  <span class="tooltip-box">Amount of credit given in NT dollars. Typical range: 10,000–1,000,000</span>
+                </span>
+              </label>
+              <input type="number" id="LIMIT_BAL" name="LIMIT_BAL" min="0" max="1000000" placeholder="e.g. 50000" required />
+            </div>
+
+            <div class="field">
+              <label>Age (years)</label>
+              <input type="number" id="AGE" name="AGE" min="18" max="100" placeholder="e.g. 35" required />
+            </div>
+
+            <div class="field">
+              <label>Sex</label>
+              <div class="select-wrapper">
+                <select id="SEX" name="SEX" required>
+                  <option value="">— Select —</option>
+                  <option value="1">Male</option>
+                  <option value="2">Female</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Education</label>
+              <div class="select-wrapper">
+                <select id="EDUCATION" name="EDUCATION" required>
+                  <option value="">— Select —</option>
+                  <option value="1">Graduate School</option>
+                  <option value="2">University</option>
+                  <option value="3">High School</option>
+                  <option value="4">Others</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Marital Status</label>
+              <div class="select-wrapper">
+                <select id="MARRIAGE" name="MARRIAGE" required>
+                  <option value="">— Select —</option>
+                  <option value="1">Married</option>
+                  <option value="2">Single</option>
+                  <option value="3">Others</option>
+                </select>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ── Section 2: Payment History ────────────────────────────── -->
+        <div class="form-section">
+          <div class="section-header">
+            <div class="section-icon purple">📋</div>
+            <div>
+              <div class="section-title">Repayment Status</div>
+              <div class="section-subtitle">-2=No consumption, -1=Paid in full, 0=Min paid, 1-8=Months delayed</div>
+            </div>
+          </div>
+          <div class="field-group" style="grid-template-columns: 1fr 1fr 1fr;">
+            <div class="field">
+              <label>Sep (PAY_0)</label>
+              <input type="number" id="PAY_0" name="PAY_0" min="-2" max="9" placeholder="-1" required />
+            </div>
+            <div class="field">
+              <label>Aug (PAY_2)</label>
+              <input type="number" id="PAY_2" name="PAY_2" min="-2" max="9" placeholder="-1" required />
+            </div>
+            <div class="field">
+              <label>Jul (PAY_3)</label>
+              <input type="number" id="PAY_3" name="PAY_3" min="-2" max="9" placeholder="0" required />
+            </div>
+            <div class="field">
+              <label>Jun (PAY_4)</label>
+              <input type="number" id="PAY_4" name="PAY_4" min="-2" max="9" placeholder="0" required />
+            </div>
+            <div class="field">
+              <label>May (PAY_5)</label>
+              <input type="number" id="PAY_5" name="PAY_5" min="-2" max="9" placeholder="0" required />
+            </div>
+            <div class="field">
+              <label>Apr (PAY_6)</label>
+              <input type="number" id="PAY_6" name="PAY_6" min="-2" max="9" placeholder="0" required />
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Section 3: Bill Amounts ────────────────────────────────── -->
+        <div class="form-section">
+          <div class="section-header">
+            <div class="section-icon cyan">💰</div>
+            <div>
+              <div class="section-title">Bill Statement Amounts (NT$)</div>
+              <div class="section-subtitle">Monthly bill amounts for last 6 months</div>
+            </div>
+          </div>
+          <div class="field-group" style="grid-template-columns: 1fr 1fr 1fr;">
+            <div class="field">
+              <label>Sep (BILL_AMT1)</label>
+              <input type="number" id="BILL_AMT1" name="BILL_AMT1" placeholder="e.g. 20000" required />
+            </div>
+            <div class="field">
+              <label>Aug (BILL_AMT2)</label>
+              <input type="number" id="BILL_AMT2" name="BILL_AMT2" placeholder="e.g. 18000" required />
+            </div>
+            <div class="field">
+              <label>Jul (BILL_AMT3)</label>
+              <input type="number" id="BILL_AMT3" name="BILL_AMT3" placeholder="e.g. 15000" required />
+            </div>
+            <div class="field">
+              <label>Jun (BILL_AMT4)</label>
+              <input type="number" id="BILL_AMT4" name="BILL_AMT4" placeholder="e.g. 12000" required />
+            </div>
+            <div class="field">
+              <label>May (BILL_AMT5)</label>
+              <input type="number" id="BILL_AMT5" name="BILL_AMT5" placeholder="e.g. 10000" required />
+            </div>
+            <div class="field">
+              <label>Apr (BILL_AMT6)</label>
+              <input type="number" id="BILL_AMT6" name="BILL_AMT6" placeholder="e.g. 9000" required />
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Section 4: Payment Amounts ────────────────────────────── -->
+        <div class="form-section">
+          <div class="section-header">
+            <div class="section-icon green">✅</div>
+            <div>
+              <div class="section-title">Previous Payment Amounts (NT$)</div>
+              <div class="section-subtitle">Actual payments made each month</div>
+            </div>
+          </div>
+          <div class="field-group" style="grid-template-columns: 1fr 1fr 1fr;">
+            <div class="field">
+              <label>Sep (PAY_AMT1)</label>
+              <input type="number" id="PAY_AMT1" name="PAY_AMT1" min="0" placeholder="e.g. 2000" required />
+            </div>
+            <div class="field">
+              <label>Aug (PAY_AMT2)</label>
+              <input type="number" id="PAY_AMT2" name="PAY_AMT2" min="0" placeholder="e.g. 2000" required />
+            </div>
+            <div class="field">
+              <label>Jul (PAY_AMT3)</label>
+              <input type="number" id="PAY_AMT3" name="PAY_AMT3" min="0" placeholder="e.g. 1500" required />
+            </div>
+            <div class="field">
+              <label>Jun (PAY_AMT4)</label>
+              <input type="number" id="PAY_AMT4" name="PAY_AMT4" min="0" placeholder="e.g. 1500" required />
+            </div>
+            <div class="field">
+              <label>May (PAY_AMT5)</label>
+              <input type="number" id="PAY_AMT5" name="PAY_AMT5" min="0" placeholder="e.g. 1200" required />
+            </div>
+            <div class="field">
+              <label>Apr (PAY_AMT6)</label>
+              <input type="number" id="PAY_AMT6" name="PAY_AMT6" min="0" placeholder="e.g. 1000" required />
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Quick Fill Buttons ─────────────────────────────────────── -->
+        <div class="form-section full-width" style="padding-top: 0; padding-bottom: 0;">
+          <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
+            <span style="font-size:12px; color:var(--text-muted); font-weight:600; text-transform:uppercase; letter-spacing:0.6px;">Quick fill:</span>
+            <button type="button" id="fill-low-risk" class="quick-btn" style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);color:#10b981;padding:6px 16px;border-radius:100px;font-size:12px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif;transition:all 0.2s;">✅ Low Risk Sample</button>
+            <button type="button" id="fill-high-risk" class="quick-btn" style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);color:#ef4444;padding:6px 16px;border-radius:100px;font-size:12px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif;transition:all 0.2s;">⚠️ High Risk Sample</button>
+            <button type="button" id="clear-form" class="quick-btn" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:var(--text-secondary);padding:6px 16px;border-radius:100px;font-size:12px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif;transition:all 0.2s;">🗑 Clear</button>
+          </div>
+        </div>
+
+        <!-- ── Submit ─────────────────────────────────────────────────── -->
+        <div class="submit-area">
+          <button type="submit" id="btn-predict" class="btn-predict">
+            <span class="spinner"></span>
+            <span class="btn-icon">🔮</span>
+            Predict Default Risk
+          </button>
+        </div>
+
+      </div><!-- /form-wrapper -->
+
+      <!-- ── Error Banner ──────────────────────────────────────────────── -->
+      <div id="error-banner" class="error-banner">
+        <span>⚠️</span>
+        <span id="error-msg">Something went wrong. Please try again.</span>
+      </div>
+
+      <!-- ── Result Panel ──────────────────────────────────────────────── -->
+      <div id="result-panel" class="glass-card" style="margin-top: 20px;">
+        <div id="result-inner" style="padding: 32px;">
+
+          <h2 style="font-size:14px; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.8px; margin-bottom:20px;">
+            🔍 Prediction Result
+          </h2>
+
+          <div id="result-card" class="result-card">
+            <div id="result-icon" class="result-icon">—</div>
+            <div class="result-info">
+              <div id="result-label" class="result-label">—</div>
+              <div id="result-desc"  class="result-desc">—</div>
+            </div>
+            <div class="gauge-area">
+              <div class="gauge-label">Default Probability</div>
+              <div class="gauge-circle">
+                <svg class="gauge-svg" viewBox="0 0 100 100">
+                  <circle class="gauge-bg"   cx="50" cy="50" r="40"/>
+                  <circle class="gauge-fill" id="gauge-fill" cx="50" cy="50" r="40"/>
+                </svg>
+                <div class="gauge-pct" id="gauge-pct">—</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="risk-breakdown" id="risk-breakdown">
+            <div class="risk-item">
+              <div class="risk-item-value" id="rb-prediction">—</div>
+              <div class="risk-item-key">Prediction</div>
+            </div>
+            <div class="risk-item">
+              <div class="risk-item-value" id="rb-prob">—</div>
+              <div class="risk-item-key">Probability</div>
+            </div>
+            <div class="risk-item">
+              <div class="risk-item-value" id="rb-risk">—</div>
+              <div class="risk-item-key">Risk Level</div>
+            </div>
+          </div>
+
+        </div>
+      </div><!-- /result-panel -->
+
+    </form>
+  </main>
+
+  <!-- ══ Footer ══════════════════════════════════════════════════════════ -->
+  <footer class="footer">
+    <p>CreditGuard AI · Built on the <a href="https://archive.ics.uci.edu/dataset/350/default+of+credit+card+clients" target="_blank">UCI Credit Card Dataset</a> · Logistic Regression Pipeline</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
