@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Prediction ML | Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">🌤️ WeatherML</div>
+        <ul class="nav-links">
+            <li><a href="/" class="active">Home</a></li>
+            <li><a href="/predict">Weather Prediction</a></li>
+            <li><a href="/about">About Project</a></li>
+        </ul>
+    </nav>
+
+    <main class="hero-section">
+        <div class="glass-card hero-card">
+            <h1>Weather Prediction using Machine Learning</h1>
+            <p>Predict future weather conditions using advanced machine learning algorithms. Enter current meteorological parameters and let the model forecast if it's going to be Sunny, Cloudy, Rainy, or Stormy.</p>
+            <a href="/predict" class="btn primary-btn">Predict Weather</a>
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

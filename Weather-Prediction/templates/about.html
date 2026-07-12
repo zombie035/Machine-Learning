@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Prediction ML | About</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">🌤️ WeatherML</div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/predict">Weather Prediction</a></li>
+            <li><a href="/about" class="active">About Project</a></li>
+        </ul>
+    </nav>
+
+    <main class="about-section">
+        <div class="glass-card about-card">
+            <h2>About This Project</h2>
+            <p>This is a beginner-level college mini project demonstrating the application of Machine Learning in web development.</p>
+            
+            <h3>Technologies Used</h3>
+            <ul class="tech-list">
+                <li><strong>Backend:</strong> Python, Flask</li>
+                <li><strong>Machine Learning:</strong> Scikit-learn (Random Forest Classifier), Pandas, NumPy</li>
+                <li><strong>Frontend:</strong> HTML5, Vanilla CSS (Glassmorphism design), JavaScript</li>
+            </ul>
+
+            <h3>How it Works</h3>
+            <p>The application uses a synthetic dataset of weather parameters to train a Random Forest model. When a user submits new weather conditions through the prediction form, the Flask backend passes these values to the saved model (`weather_model.pkl`), which predicts the most likely weather state and returns it to the UI.</p>
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
